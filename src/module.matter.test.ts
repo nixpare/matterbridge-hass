@@ -151,7 +151,7 @@ describe('Matterbridge ' + NAME, () => {
   } as any;
 
   const mockConfig: HomeAssistantPlatformConfig = {
-    name: 'matterbridge-hass',
+    name: 'matterbridge-hass-nixpare',
     type: 'DynamicPlatform',
     version: '1.0.0',
     host: 'http://homeassistant.local:8123',

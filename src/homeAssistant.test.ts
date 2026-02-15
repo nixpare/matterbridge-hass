@@ -740,7 +740,7 @@ describe('HomeAssistant', () => {
 
   it('should not connect if wsUrl is wss:// and certificate are not correct', async () => {
     process.argv = [...originalProcessArgv];
-    homeAssistant = new HomeAssistant('wss://localhost:8123', accessToken, reconnectTimeoutTime, reconnectRetries, path.join('certificates', 'matterbridge-hass-ca.crt'));
+    homeAssistant = new HomeAssistant('wss://localhost:8123', accessToken, reconnectTimeoutTime, reconnectRetries, path.join('certificates', 'matterbridge-hass-nixpare-ca.crt'));
 
     homeAssistant.on('error', () => {
       // Handle error event
@@ -752,7 +752,7 @@ describe('HomeAssistant', () => {
       expect(error).toBeDefined();
     }
 
-    expect(loggerLogSpy).toHaveBeenCalledWith(LogLevel.DEBUG, `Loading CA certificate from ${path.join('certificates', 'matterbridge-hass-ca.crt')}...`);
+    expect(loggerLogSpy).toHaveBeenCalledWith(LogLevel.DEBUG, `Loading CA certificate from ${path.join('certificates', 'matterbridge-hass-nixpare-ca.crt')}...`);
     expect(loggerLogSpy).toHaveBeenCalledWith(LogLevel.DEBUG, `CA certificate loaded successfully`);
     expect(loggerLogSpy).toHaveBeenCalledWith(LogLevel.ERROR, expect.stringContaining(`WebSocket error:`));
     expect(homeAssistant.connected).toBe(false);
@@ -1101,7 +1101,7 @@ describe('HomeAssistant with ssl', () => {
 
   it('client should connect', async () => {
     client = new WebSocket(wsUrl + apiPath, {
-      ca: fs.readFileSync(path.join('certificates', 'matterbridge-hass-ca.crt')),
+      ca: fs.readFileSync(path.join('certificates', 'matterbridge-hass-nixpare-ca.crt')),
       rejectUnauthorized: true,
     });
 
@@ -1397,7 +1397,7 @@ describe('HomeAssistant with ssl', () => {
   });
 
   it('should close for timeout', async () => {
-    homeAssistant = new HomeAssistant('wss://localhost:8123', accessToken, undefined, undefined, path.join('certificates', 'matterbridge-hass-ca.crt'), false);
+    homeAssistant = new HomeAssistant('wss://localhost:8123', accessToken, undefined, undefined, path.join('certificates', 'matterbridge-hass-nixpare-ca.crt'), false);
     homeAssistant.on('error', () => {
       //
     });
@@ -1435,7 +1435,7 @@ describe('HomeAssistant with ssl', () => {
   });
 
   it('should connect to Home Assistant with ssl and CA certificate', async () => {
-    homeAssistant = new HomeAssistant('wss://localhost:8123', accessToken, undefined, undefined, path.join('certificates', 'matterbridge-hass-ca.crt'), false);
+    homeAssistant = new HomeAssistant('wss://localhost:8123', accessToken, undefined, undefined, path.join('certificates', 'matterbridge-hass-nixpare-ca.crt'), false);
     homeAssistant.on('error', () => {
       //
     });
@@ -1468,7 +1468,7 @@ describe('HomeAssistant with ssl', () => {
 
   it('should connect to Home Assistant with ssl and self-signed CA certificate', async () => {
     // jest.restoreAllMocks();
-    homeAssistant = new HomeAssistant('wss://localhost:8123', accessToken, undefined, undefined, path.join('certificates', 'matterbridge-hass-ca.crt'), true);
+    homeAssistant = new HomeAssistant('wss://localhost:8123', accessToken, undefined, undefined, path.join('certificates', 'matterbridge-hass-nixpare-ca.crt'), true);
 
     await homeAssistant.connect();
 
